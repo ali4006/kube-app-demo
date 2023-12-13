@@ -22,9 +22,8 @@ node {
         }
     }
 
-    stage('Trigger ManifestUpdate'){
-        echo "triggering update manifest job"
-        // build job: 'updatemanifest', parameter: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+    stage('Trigger Manifest Update'){
+        echo "Update manifest file"
 
         script {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -32,7 +31,6 @@ node {
                     //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
                     sh "git config user.email ali.salar007@gmail.com"
                     sh "git config user.name ali4006"
-                    //sh "git switch master"
                     sh "cat deployment.yaml"
                     sh "sed -i 's+salari/kube-app-demo.*+salari/kube-app-demo:${env.BUILD_NUMBER}+g' deployment.yaml"
                     sh "cat deployment.yaml"
