@@ -7,7 +7,7 @@ node {
     }
 
     stage('Build Image') {
-        app = docker.build("salari/kube-app-demo")
+        app = docker.build("salari/kube-app-demo", "./app")
     }
 
     stage('Test Image') {
